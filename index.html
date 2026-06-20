@@ -1,0 +1,1834 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Supermercado SER — Proyecto de Diseño Interior por José González. Ruiz Pineda, Caracas, Venezuela. ~240 m² de diseño arquitectónico premium." />
+  <meta name="keywords" content="Supermercado SER, diseño interior, arquitectura comercial, Caracas, Venezuela, José González, ArchViz, Retail" />
+  <meta property="og:title" content="Supermercado SER — Diseño Interior" />
+  <meta property="og:description" content="Proyecto de diseño interior arquitectónico ubicado en Ruiz Pineda, Caracas. Diseñado por José González." />
+  <meta property="og:image" content="imagenes/Exterior local.webp" />
+  <meta property="og:type" content="website" />
+  <title>Supermercado SER — Diseño Interior | José González</title>
+
+  <!-- Google Fonts: Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,300&display=swap&font-display=optional" rel="stylesheet" />
+
+  <!-- Critical resource hints -->
+  <link rel="preload" as="image" href="imagenes/Exterior local.webp" fetchpriority="high" />
+
+  <style>
+    /* ============================================================
+       01. RESET & CUSTOM PROPERTIES
+    ============================================================ */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      /* Palette */
+      --gold:           #e2b74c;
+      --gold-light:     #f5d07a;
+      --gold-dim:       #b8923b;
+      --gold-alpha-10:  rgba(226, 183, 76, 0.10);
+      --gold-alpha-20:  rgba(226, 183, 76, 0.20);
+      --gold-alpha-30:  rgba(226, 183, 76, 0.30);
+
+      --white:          #ffffff;
+      --text-primary:   #ffffff;
+      --text-secondary: #a0a0a5;
+      --text-muted:     #5a5a62;
+
+      --bg-base:        #121214;
+      --bg-card:        rgba(26, 26, 30, 0.60);
+      --bg-card-solid:  rgba(26, 26, 30, 0.85);
+      --bg-card-hover:  rgba(32, 32, 38, 0.80);
+
+      --border-subtle:  rgba(255, 255, 255, 0.07);
+      --border-gold:    rgba(226, 183, 76, 0.25);
+
+      /* Elevation */
+      --shadow-sm:   0 2px 12px rgba(0, 0, 0, 0.35);
+      --shadow-md:   0 8px 32px rgba(0, 0, 0, 0.50);
+      --shadow-lg:   0 20px 60px rgba(0, 0, 0, 0.65);
+      --shadow-gold: 0 0 40px rgba(226, 183, 76, 0.15);
+
+      /* Shape */
+      --radius-xs:  6px;
+      --radius-sm:  10px;
+      --radius-md:  16px;
+      --radius-lg:  22px;
+      --radius-xl:  30px;
+
+      /* Motion */
+      --ease:       cubic-bezier(0.4, 0, 0.2, 1);
+      --duration:   0.38s;
+      --transition: var(--duration) var(--ease);
+
+      /* Font */
+      --font: 'Montserrat', system-ui, sans-serif;
+    }
+
+    /* ============================================================
+       02. BASE
+    ============================================================ */
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--font);
+      color: var(--text-primary);
+      line-height: 1.65;
+      min-height: 100vh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+
+      /* ── FONDO HÍBRIDO GLOBAL ── */
+      background-color: var(--bg-base);
+      background-image:
+        linear-gradient(rgba(18, 18, 20, 0.92), rgba(18, 18, 20, 0.95)),
+        url('imagenes/Nevera exhibidora y anaqueles.webp');
+      background-attachment: fixed;  /* Desktop: efecto parallax */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* ============================================================
+       03. SCROLLBAR
+    ============================================================ */
+    ::-webkit-scrollbar            { width: 5px; }
+    ::-webkit-scrollbar-track      { background: var(--bg-base); }
+    ::-webkit-scrollbar-thumb      { background: var(--gold-dim); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover{ background: var(--gold); }
+
+    /* ============================================================
+       04. LAYOUT UTILITIES
+    ============================================================ */
+    .container {
+      width: 100%;
+      max-width: 1160px;
+      margin-inline: auto;
+      padding-inline: clamp(1.25rem, 5vw, 2.5rem);
+    }
+
+    .section {
+      padding-block: clamp(4.5rem, 9vh, 7rem);
+    }
+
+    /* ============================================================
+       05. TYPOGRAPHY COMPONENTS
+    ============================================================ */
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.9rem;
+    }
+
+    .eyebrow::before {
+      content: '';
+      width: 28px;
+      height: 1.5px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-size: clamp(1.75rem, 4.5vw, 2.8rem);
+      font-weight: 800;
+      line-height: 1.18;
+      letter-spacing: -0.025em;
+      color: var(--text-primary);
+    }
+
+    .section-title em {
+      color: var(--gold);
+      font-style: normal;
+    }
+
+    .section-desc {
+      margin-top: 1rem;
+      font-size: clamp(0.88rem, 1.8vw, 1rem);
+      font-weight: 400;
+      color: var(--text-secondary);
+      max-width: 580px;
+      line-height: 1.75;
+    }
+
+    .title-rule {
+      width: 44px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+      margin-top: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    /* ============================================================
+       06. BUTTONS
+    ============================================================ */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.65rem;
+      padding: 0.95rem 2rem;
+      border-radius: var(--radius-md);
+      font-family: var(--font);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border: none;
+      transition: var(--transition);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .btn svg {
+      width: 17px;
+      height: 17px;
+      fill: currentColor;
+      flex-shrink: 0;
+      transition: transform var(--duration) var(--ease);
+    }
+
+    .btn:hover svg { transform: translateY(2px); }
+
+    .btn-gold {
+      background: linear-gradient(135deg, var(--gold), var(--gold-dim));
+      color: #111;
+      box-shadow: 0 4px 22px rgba(226, 183, 76, 0.28);
+    }
+
+    .btn-gold:hover {
+      background: linear-gradient(135deg, var(--gold-light), var(--gold));
+      transform: translateY(-2px);
+      box-shadow: 0 10px 36px rgba(226, 183, 76, 0.42);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-primary);
+      border: 1.5px solid var(--border-gold);
+      backdrop-filter: blur(8px);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* ============================================================
+       07. HEADER / NAV
+    ============================================================ */
+    #site-header {
+      position: fixed;
+      inset-block-start: 0;
+      inset-inline: 0;
+      z-index: 200;
+      padding-block: 1rem;
+      backdrop-filter: blur(22px) saturate(140%);
+      -webkit-backdrop-filter: blur(22px) saturate(140%);
+      background: rgba(18, 18, 20, 0.78);
+      border-bottom: 1px solid var(--border-subtle);
+      transition: padding var(--transition), background var(--transition);
+    }
+
+    #site-header.scrolled {
+      padding-block: 0.6rem;
+      background: rgba(18, 18, 20, 0.95);
+    }
+
+    #site-header nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    /* Brand */
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      flex-shrink: 0;
+    }
+
+    .nav-brand-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-xs);
+      background: linear-gradient(135deg, var(--gold), var(--gold-dim));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-brand-mark svg {
+      width: 20px;
+      height: 20px;
+      fill: #111;
+    }
+
+    .nav-brand-text { line-height: 1.2; }
+
+    .nav-brand-name {
+      display: block;
+      font-size: 0.92rem;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+    }
+
+    .nav-brand-sub {
+      display: block;
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    /* Links */
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.15rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.77rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      padding: 0.5rem 0.9rem;
+      border-radius: var(--radius-xs);
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--gold); background: var(--gold-alpha-10); }
+
+    .nav-cta-link {
+      background: linear-gradient(135deg, var(--gold), var(--gold-dim)) !important;
+      color: #111 !important;
+      font-weight: 700 !important;
+      border-radius: var(--radius-xs) !important;
+    }
+
+    .nav-cta-link:hover {
+      background: linear-gradient(135deg, var(--gold-light), var(--gold)) !important;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 24px rgba(226, 183, 76, 0.35) !important;
+    }
+
+    /* Hamburger */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 0.5rem;
+      background: none;
+      border: none;
+    }
+
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text-primary);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ============================================================
+       08. HERO
+    ============================================================ */
+    #hero {
+      position: relative;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      overflow: hidden;
+      padding-top: 80px;
+    }
+
+    /* Parallax bg image — overrides body fixed bg for hero only */
+    .hero-backdrop {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(
+          to bottom,
+          rgba(18, 18, 20, 0.20) 0%,
+          rgba(18, 18, 20, 0.45) 45%,
+          rgba(18, 18, 20, 0.88) 75%,
+          rgba(18, 18, 20, 1.00) 100%
+        ),
+        url('imagenes/Exterior local.webp');
+      background-size: cover;
+      background-position: center 30%;
+      animation: heroReveal 1.4s var(--ease) both;
+    }
+
+    @keyframes heroReveal {
+      from { opacity: 0; transform: scale(1.06); }
+      to   { opacity: 1; transform: scale(1.00); }
+    }
+
+    .hero-body {
+      position: relative;
+      z-index: 2;
+      padding-block-end: clamp(3.5rem, 8vh, 6rem);
+    }
+
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      background: rgba(226, 183, 76, 0.10);
+      border: 1px solid rgba(226, 183, 76, 0.28);
+      border-radius: 50px;
+      padding: 0.38rem 1.1rem;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.6rem;
+      backdrop-filter: blur(8px);
+      animation: slideUp 0.9s 0.2s var(--ease) both;
+    }
+
+    .hero-pulse {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--gold);
+      animation: pulse 2.2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50%       { transform: scale(0.7); opacity: 0.45; }
+    }
+
+    .hero-h1 {
+      font-size: clamp(3rem, 11vw, 7.5rem);
+      font-weight: 900;
+      line-height: 0.96;
+      letter-spacing: -0.03em;
+      animation: slideUp 0.9s 0.35s var(--ease) both;
+    }
+
+    .hero-h1 .gold { color: var(--gold); }
+
+    .hero-tagline {
+      margin-top: 1.1rem;
+      font-size: clamp(0.95rem, 2.4vw, 1.2rem);
+      font-weight: 300;
+      color: var(--text-secondary);
+      letter-spacing: 0.04em;
+      animation: slideUp 0.9s 0.5s var(--ease) both;
+    }
+
+    .hero-location {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1.4rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      animation: slideUp 0.9s 0.65s var(--ease) both;
+    }
+
+    .hero-location svg { width: 14px; height: 14px; fill: var(--gold); flex-shrink: 0; }
+
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 2.8rem;
+      animation: slideUp 0.9s 0.82s var(--ease) both;
+    }
+
+    /* Scroll cue */
+    .hero-scroll-cue {
+      position: absolute;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.45rem;
+      animation: slideUp 0.9s 1.2s var(--ease) both;
+    }
+
+    .hero-scroll-cue span {
+      font-size: 0.58rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      writing-mode: vertical-rl;
+    }
+
+    .hero-scroll-line {
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: scrollBlink 2.2s ease-in-out infinite;
+    }
+
+    @keyframes scrollBlink {
+      0%, 100% { opacity: 0.25; transform: scaleY(1); }
+      50%       { opacity: 1;    transform: scaleY(0.55); }
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ============================================================
+       09. FICHA TÉCNICA
+    ============================================================ */
+    #ficha {
+      padding-block: clamp(4rem, 8vh, 6rem);
+    }
+
+    .ficha-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5px;
+      background: var(--border-gold);
+      border: 1.5px solid var(--border-gold);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      margin-top: 3rem;
+    }
+
+    .ficha-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      padding: clamp(2rem, 4vw, 2.8rem) clamp(1.2rem, 3vw, 2rem);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 0.8rem;
+      position: relative;
+      overflow: hidden;
+      transition: background var(--transition);
+    }
+
+    .ficha-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(145deg, rgba(226, 183, 76, 0.06), transparent 60%);
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+
+    .ficha-card:hover { background: var(--bg-card-hover); }
+    .ficha-card:hover::before { opacity: 1; }
+
+    .ficha-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: var(--radius-sm);
+      background: var(--gold-alpha-10);
+      border: 1px solid var(--border-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .ficha-card:hover .ficha-icon {
+      background: var(--gold-alpha-20);
+      box-shadow: var(--shadow-gold);
+    }
+
+    .ficha-icon svg { width: 24px; height: 24px; fill: var(--gold); }
+
+    .ficha-value {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      line-height: 1;
+    }
+
+    .ficha-value em { color: var(--gold); font-style: normal; }
+
+    .ficha-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .ficha-note {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      font-weight: 400;
+    }
+
+    /* ============================================================
+       10. VIDEO CINEMÁTICO
+    ============================================================ */
+    #video-section { position: relative; }
+
+    .video-frame {
+      position: relative;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      background: #000;
+      box-shadow: var(--shadow-lg), var(--shadow-gold);
+      border: 1px solid var(--border-gold);
+      margin-top: 2.5rem;
+
+      /* Force 16:9 */
+      aspect-ratio: 16 / 9;
+    }
+
+    .video-frame video {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      border-radius: inherit;
+    }
+
+    /* Decorative corner brackets */
+    .video-frame::before,
+    .video-frame::after {
+      content: '';
+      position: absolute;
+      width: 26px;
+      height: 26px;
+      border-color: var(--gold);
+      border-style: solid;
+      border-width: 0;
+      opacity: 0.55;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .video-frame::before {
+      top: 14px;
+      left: 14px;
+      border-top-width: 2px;
+      border-left-width: 2px;
+    }
+
+    .video-frame::after {
+      bottom: 14px;
+      right: 14px;
+      border-bottom-width: 2px;
+      border-right-width: 2px;
+    }
+
+    /* Corner bottom-left & top-right via pseudo spans */
+    .video-corner-tr,
+    .video-corner-bl {
+      position: absolute;
+      width: 26px;
+      height: 26px;
+      border-color: var(--gold);
+      border-style: solid;
+      border-width: 0;
+      opacity: 0.55;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .video-corner-tr { top: 14px; right: 14px; border-top-width: 2px; border-right-width: 2px; }
+    .video-corner-bl { bottom: 14px; left: 14px; border-bottom-width: 2px; border-left-width: 2px; }
+
+    /* Fallback message inside <video> */
+    .video-fallback {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      padding: 3rem 2rem;
+      text-align: center;
+      min-height: 240px;
+    }
+
+    .video-fallback-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: var(--radius-md);
+      background: var(--gold-alpha-10);
+      border: 1px solid var(--border-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .video-fallback-icon svg { width: 32px; height: 32px; fill: var(--gold); }
+
+    .video-fallback p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      max-width: 360px;
+    }
+
+    .video-fallback a {
+      color: var(--gold);
+      font-weight: 600;
+      border-bottom: 1px solid rgba(226, 183, 76, 0.4);
+      transition: var(--transition);
+    }
+
+    .video-fallback a:hover { color: var(--gold-light); }
+
+    /* ============================================================
+       11. PLANO 2D
+    ============================================================ */
+    #planos {
+      background:
+        linear-gradient(rgba(18, 18, 20, 0.88), rgba(18, 18, 20, 0.92)),
+        url('imagenes/Nevera exhibidora y anaqueles.webp') center / cover fixed;  /* Desktop */
+    }
+
+    .plano-image-frame {
+      margin-top: 2.5rem;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      border: 1px solid var(--border-gold);
+      box-shadow: var(--shadow-lg);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    /* Chrome bar */
+    .plano-chrome {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.9rem 1.4rem;
+      background: rgba(255, 255, 255, 0.03);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .chrome-dots { display: flex; gap: 6px; }
+    .chrome-dots span {
+      width: 11px; height: 11px;
+      border-radius: 50%;
+    }
+    .chrome-dots span:nth-child(1) { background: #ff5f57; }
+    .chrome-dots span:nth-child(2) { background: #ffbd2e; }
+    .chrome-dots span:nth-child(3) { background: #28c840; }
+
+    .chrome-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .plano-img-wrap {
+      padding: 1.5rem;
+      display: flex;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.25);
+    }
+
+    .plano-img-wrap img {
+      width: 100%;
+      max-height: 640px;
+      object-fit: contain;
+      border-radius: var(--radius-md);
+    }
+
+    .plano-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+
+    /* ============================================================
+       12. GALERÍA 3D
+    ============================================================ */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
+      margin-top: 2.5rem;
+    }
+
+    /* First item spans 2 columns + has wider aspect */
+    .gallery-item:first-child {
+      grid-column: span 2;
+    }
+
+    .gallery-item:first-child .gallery-thumb {
+      aspect-ratio: 16 / 9;
+    }
+
+    .gallery-item {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background: var(--bg-card-solid);
+      border: 1px solid var(--border-subtle);
+      transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+      cursor: pointer;
+    }
+
+    .gallery-item:hover {
+      border-color: rgba(226, 183, 76, 0.32);
+      transform: translateY(-5px);
+      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(226, 183, 76, 0.12);
+    }
+
+    .gallery-thumb {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 4 / 3;
+    }
+
+    .gallery-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s var(--ease);
+    }
+
+    .gallery-item:hover .gallery-thumb img { transform: scale(1.07); }
+
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(18, 18, 20, 0.72) 0%, transparent 55%);
+      opacity: 0;
+      transition: opacity var(--transition);
+      display: flex;
+      align-items: flex-end;
+      padding: 1rem;
+    }
+
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+
+    .gallery-zoom-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(226, 183, 76, 0.88);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: auto;
+    }
+
+    .gallery-zoom-btn svg { width: 16px; height: 16px; fill: #111; }
+
+    .gallery-caption {
+      padding: 0.8rem 1rem;
+      font-size: 0.76rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      color: var(--text-secondary);
+      border-top: 1px solid var(--border-subtle);
+      line-height: 1.35;
+    }
+
+    /* ============================================================
+       13. LIGHTBOX
+    ============================================================ */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(0, 0, 0, 0.96);
+      backdrop-filter: blur(10px);
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      cursor: zoom-out;
+    }
+
+    #lightbox.open { display: flex; }
+
+    #lightbox img {
+      max-width: min(92vw, 1080px);
+      max-height: 88vh;
+      object-fit: contain;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      cursor: default;
+    }
+
+    #lb-close {
+      position: absolute;
+      top: 1.4rem;
+      right: 1.4rem;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.07);
+      color: var(--text-secondary);
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    #lb-close:hover { border-color: var(--gold); color: var(--gold); background: var(--gold-alpha-10); }
+
+    #lb-caption {
+      position: absolute;
+      bottom: 1.4rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    /* ============================================================
+       14. CONTACTO / OUTRO
+    ============================================================ */
+    #contacto {
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    /* Giant watermark */
+    #contacto::before {
+      content: 'SER';
+      position: absolute;
+      inset: 50% 50% auto auto;
+      transform: translate(50%, -50%);
+      font-size: clamp(9rem, 24vw, 18rem);
+      font-weight: 900;
+      letter-spacing: -0.06em;
+      color: rgba(226, 183, 76, 0.035);
+      pointer-events: none;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .contact-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--gold-alpha-10);
+      border: 1px solid var(--border-gold);
+      border-radius: 50px;
+      padding: 0.4rem 1.2rem;
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.8rem;
+    }
+
+    .contact-headline {
+      font-size: clamp(2rem, 5.5vw, 3.6rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      max-width: 720px;
+      margin-inline: auto;
+    }
+
+    .contact-headline em { color: var(--gold); font-style: normal; }
+
+    .contact-sub {
+      margin-top: 1rem;
+      font-size: clamp(0.9rem, 1.8vw, 1.05rem);
+      font-weight: 400;
+      color: var(--text-secondary);
+      max-width: 440px;
+      margin-inline: auto;
+      line-height: 1.7;
+    }
+
+    .contact-cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.2rem;
+      margin-top: 3rem;
+    }
+
+    .contact-card {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: var(--bg-card-solid);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1.3rem 1.8rem;
+      text-decoration: none;
+      min-width: 265px;
+      transition: var(--transition);
+    }
+
+    .contact-card:hover {
+      border-color: var(--border-gold);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .contact-card-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .icon-mail { background: var(--gold-alpha-10); border: 1px solid var(--border-gold); }
+    .icon-mail svg { fill: var(--gold); width: 23px; height: 23px; }
+
+    .icon-wa { background: rgba(37, 211, 102, 0.10); border: 1px solid rgba(37, 211, 102, 0.25); }
+    .icon-wa svg { fill: #25d366; width: 23px; height: 23px; }
+
+    .contact-card-info { text-align: left; }
+
+    .contact-card-label {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.22rem;
+    }
+
+    .contact-card-value {
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      transition: color var(--transition);
+    }
+
+    .contact-card:hover .contact-card-value { color: var(--gold); }
+
+    .contact-location {
+      margin-top: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+    }
+
+    .contact-location svg { width: 14px; height: 14px; fill: var(--gold); }
+
+    /* ============================================================
+       15. FOOTER
+    ============================================================ */
+    footer {
+      border-top: 1px solid var(--border-subtle);
+      padding-block: 2rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      letter-spacing: 0.04em;
+    }
+
+    .footer-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+
+    .footer-copy {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      letter-spacing: 0.05em;
+    }
+
+    /* ============================================================
+       16. SCROLL-REVEAL ANIMATIONS
+    ============================================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s var(--ease), transform 0.75s var(--ease);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-d1 { transition-delay: 0.08s; }
+    .reveal-d2 { transition-delay: 0.16s; }
+    .reveal-d3 { transition-delay: 0.24s; }
+    .reveal-d4 { transition-delay: 0.32s; }
+    .reveal-d5 { transition-delay: 0.40s; }
+    .reveal-d6 { transition-delay: 0.48s; }
+
+    /* ============================================================
+       17. CONTENT-VISIBILITY — off-screen sections skip rendering
+    ============================================================ */
+    #ficha, #video-section, #planos, #galeria, #contacto {
+      content-visibility: auto;
+      contain-intrinsic-size: 0 600px; /* estimado para evitar layout shift */
+    }
+
+    /* ============================================================
+       18. PREFERS-REDUCED-MOTION
+    ============================================================ */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+      .hero-backdrop { animation: none; }
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+
+    /* ============================================================
+       19. RESPONSIVE BREAKPOINTS
+    ============================================================ */
+    @media (max-width: 960px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 62px;
+        inset-inline: 0;
+        background: rgba(18, 18, 20, 0.98);
+        /* Sin backdrop-filter en mobile: demasiado costoso en GPU */
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        background: rgba(18, 18, 20, 0.99);
+        padding: 1.5rem 1.5rem 2rem;
+        gap: 0.35rem;
+        border-bottom: 1px solid var(--border-gold);
+      }
+
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-item:first-child { grid-column: span 2; }
+
+      .ficha-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── MOBILE PERFORMANCE CRITICAL ─────────────────────────────
+       background-attachment:fixed causa un repintado completo de
+       la GPU en cada frame de scroll en dispositivos móviles.
+       Se reemplaza por background-attachment:scroll en ≤768px.
+    ──────────────────────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      body {
+        background-attachment: scroll;
+      }
+
+      #planos {
+        background:
+          linear-gradient(rgba(18, 18, 20, 0.88), rgba(18, 18, 20, 0.92)),
+          url('imagenes/Nevera exhibidora y anaqueles.webp') center / cover scroll;
+      }
+
+      /* Eliminar backdrop-filter en mobile — muy costoso en GPU */
+      #site-header {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        background: rgba(18, 18, 20, 0.97);
+      }
+
+      .ficha-card {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        background: rgba(26, 26, 30, 0.92);
+      }
+
+      .contact-card {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        background: rgba(26, 26, 30, 0.92);
+      }
+
+      .btn-ghost {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+      }
+
+      .hero-pill {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+      }
+
+      /* Reducir animación del hero en mobile */
+      @keyframes heroReveal {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+      }
+    }
+
+    @media (max-width: 600px) {
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-item:first-child { grid-column: span 1; }
+      .gallery-item:first-child .gallery-thumb { aspect-ratio: 4 / 3; }
+
+      .hero-ctas { flex-direction: column; }
+      .hero-ctas .btn { justify-content: center; width: 100%; }
+
+      .plano-actions { flex-direction: column; }
+      .plano-actions .btn { width: 100%; }
+
+      .contact-cards { flex-direction: column; }
+      .contact-card { min-width: 100%; width: 100%; }
+
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       HEADER
+  ============================================================ -->
+  <header id="site-header">
+    <div class="container">
+      <nav aria-label="Navegación principal">
+        <!-- Brand -->
+        <a href="#hero" class="nav-brand" aria-label="Ir al inicio — Supermercado SER">
+          <div class="nav-brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+          </div>
+          <div class="nav-brand-text">
+            <span class="nav-brand-name">Supermercado SER</span>
+            <span class="nav-brand-sub">Diseño Interior</span>
+          </div>
+        </a>
+
+        <!-- Desktop links -->
+        <ul class="nav-links" id="nav-links">
+          <li><a href="#ficha"   id="nl-ficha">Ficha</a></li>
+          <li><a href="#video-section" id="nl-video">Video</a></li>
+          <li><a href="#planos"  id="nl-planos">Planos</a></li>
+          <li><a href="#galeria" id="nl-galeria">Galería</a></li>
+          <li><a href="#contacto" class="nav-cta-link" id="nl-contacto">Contacto</a></li>
+        </ul>
+
+        <!-- Hamburger -->
+        <button class="nav-hamburger" id="nav-hamburger" aria-label="Abrir menú" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       HERO
+  ============================================================ -->
+  <section id="hero" aria-label="Presentación principal del proyecto">
+    <div class="hero-backdrop" role="img" aria-label="Fachada exterior Supermercado SER"></div>
+
+    <div class="container">
+      <div class="hero-body">
+
+        <div class="hero-pill">
+          <span class="hero-pulse" aria-hidden="true"></span>
+          Proyecto de Diseño Interior
+        </div>
+
+        <h1 class="hero-h1">
+          Supermercado<br><span class="gold">SER</span>
+        </h1>
+
+        <p class="hero-tagline">Arquitectura Comercial &amp; Visualización 3D</p>
+
+        <div class="hero-location" aria-label="Ubicación: Ruiz Pineda, Caracas, Venezuela">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Ruiz Pineda, Caracas, Venezuela
+        </div>
+
+        <div class="hero-ctas">
+          <a href="#galeria" class="btn btn-gold" id="hero-btn-gallery">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+            Ver Galería 3D
+          </a>
+          <a href="#video-section" class="btn btn-ghost" id="hero-btn-video">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+            Ver Video Render
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="hero-scroll-cue" aria-hidden="true">
+      <span>Scroll</span>
+      <div class="hero-scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FICHA TÉCNICA
+  ============================================================ -->
+  <section id="ficha" class="section" aria-labelledby="ficha-title">
+    <div class="container">
+
+      <div class="reveal">
+        <div class="eyebrow">01 &nbsp;/&nbsp; Información Técnica</div>
+        <h2 class="section-title" id="ficha-title">Ficha <em>Técnica</em></h2>
+        <div class="title-rule" aria-hidden="true"></div>
+      </div>
+
+      <div class="ficha-grid reveal reveal-d1" role="list" aria-label="Datos técnicos del proyecto">
+
+        <article class="ficha-card" role="listitem">
+          <div class="ficha-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M10 2v2H4v18h16V4h-6V2h-4zM6 18v-2h2v2H6zm0-4v-2h2v2H6zm0-4V8h2v2H6zm4 8v-2h2v2h-2zm0-4v-2h2v2h-2zm0-4V8h2v2h-2zm4 8v-2h2v2h-2zm0-4v-2h2v2h-2zm0-4V8h2v2h-2z"/></svg>
+          </div>
+          <div class="ficha-value">~240 <em>m²</em></div>
+          <div class="ficha-label">Área Total</div>
+          <div class="ficha-note">Superficie de intervención aproximada</div>
+        </article>
+
+        <article class="ficha-card" role="listitem">
+          <div class="ficha-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+          </div>
+          <div class="ficha-value" style="font-size: clamp(1.1rem, 3.5vw, 1.55rem); padding-top: 0.25rem;">
+            José <em>González</em>
+          </div>
+          <div class="ficha-label">Diseñador</div>
+          <div class="ficha-note">Diseño Arquitectónico de Interiores</div>
+        </article>
+
+        <article class="ficha-card" role="listitem">
+          <div class="ficha-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M20 3H4v10c0 2.21 1.79 4 4 4h6c2.21 0 4-1.79 4-4v-3h2c1.11 0 2-.89 2-2V5c0-1.11-.89-2-2-2zm0 5h-2V5h2v3zM4 19h16v2H4z"/></svg>
+          </div>
+          <div class="ficha-value">1 : <em>50</em></div>
+          <div class="ficha-label">Escala del Plano</div>
+          <div class="ficha-note">Plano arquitectónico técnico certificado</div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       VIDEO CINEMÁTICO
+  ============================================================ -->
+  <section id="video-section" class="section" aria-labelledby="video-title">
+    <div class="container">
+
+      <div class="reveal">
+        <div class="eyebrow">02 &nbsp;/&nbsp; Render Arquitectónico</div>
+        <h2 class="section-title" id="video-title">Video <em>Cinemático</em></h2>
+        <div class="title-rule" aria-hidden="true"></div>
+        <p class="section-desc">
+          Recorrido virtual fotorrealista por los espacios de Supermercado SER, con iluminación, materiales y propuesta de diseño definitivos.
+        </p>
+      </div>
+
+      <div class="video-frame reveal reveal-d2">
+        <!-- Corner accents -->
+        <span class="video-corner-tr" aria-hidden="true"></span>
+        <span class="video-corner-bl" aria-hidden="true"></span>
+
+        <video
+          id="main-video"
+          controls
+          preload="metadata"
+          poster="imagenes/Exterior local.webp"
+          aria-label="Video render Supermercado SER — Ruiz Pineda, Caracas"
+        >
+          <source src="videos/Render Ruiz Pineda 720p60fps.mp4" type="video/mp4" />
+
+          <!-- Elegant HTML fallback -->
+          <div class="video-fallback">
+            <div class="video-fallback-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/></svg>
+            </div>
+            <p>
+              Tu navegador no puede reproducir este video nativo.
+              <a href="videos/Render Ruiz Pineda 720p60fps.mp4" download>Descárgalo aquí para verlo</a>
+              o actualiza tu navegador a una versión compatible con HTML5.
+            </p>
+          </div>
+        </video>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PLANO 2D
+  ============================================================ -->
+  <section id="planos" class="section" aria-labelledby="planos-title">
+    <div class="container">
+
+      <div class="reveal">
+        <div class="eyebrow">03 &nbsp;/&nbsp; Documentación Técnica</div>
+        <h2 class="section-title" id="planos-title">Planos <em>Arquitectónicos</em></h2>
+        <div class="title-rule" aria-hidden="true"></div>
+        <p class="section-desc">
+          Plano arquitectónico técnico en escala 1:50. Disponible para descarga directa en formato PDF editable y DWG (AutoCAD).
+        </p>
+      </div>
+
+      <!-- Plano image viewer -->
+      <div class="plano-image-frame reveal reveal-d1">
+        <div class="plano-chrome" aria-hidden="true">
+          <div class="chrome-dots"><span></span><span></span><span></span></div>
+          <span class="chrome-label">Plano Arquitectónico — Supermercado SER · Escala 1:50</span>
+          <span></span>
+        </div>
+        <div class="plano-img-wrap">
+          <img
+            src="imagenes/Vista Plano 2D.webp"
+            alt="Plano 2D arquitectónico del Supermercado SER, Ruiz Pineda, escala 1:50"
+            width="1200"
+            height="800"
+            loading="lazy"
+          />
+        </div>
+      </div>
+
+      <!-- Download buttons -->
+      <div class="plano-actions reveal reveal-d2">
+        <a
+          href="documentos/Plano Arquitectonico Supermercado Ser Ruiz Pineda.pdf"
+          download="Plano Arquitectonico Supermercado Ser Ruiz Pineda.pdf"
+          class="btn btn-gold"
+          id="btn-dl-pdf"
+          aria-label="Descargar plano completo en formato PDF"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          Descargar Plano Completo (PDF)
+        </a>
+
+        <a
+          href="documentos/Plano Arquitectonico Supermercado Ser Ruiz Pineda.dwg"
+          download="Plano Arquitectonico Supermercado Ser Ruiz Pineda.dwg"
+          class="btn btn-ghost"
+          id="btn-dl-dwg"
+          aria-label="Descargar archivo técnico AutoCAD en formato DWG"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+          Descargar Archivo Técnico (DWG)
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       GALERÍA 3D
+  ============================================================ -->
+  <section id="galeria" class="section" aria-labelledby="galeria-title">
+    <div class="container">
+
+      <div class="reveal">
+        <div class="eyebrow">04 &nbsp;/&nbsp; Visualización 3D</div>
+        <h2 class="section-title" id="galeria-title">Galería <em>3D</em></h2>
+        <div class="title-rule" aria-hidden="true"></div>
+        <p class="section-desc">
+          Renders fotorrealistas de cada zona del proyecto. Haz clic sobre cualquier imagen para ampliarla en pantalla completa.
+        </p>
+      </div>
+
+      <div class="gallery-grid" id="gallery-grid" role="list" aria-label="Galería de renders 3D">
+
+        <!-- 01 — Exterior (destacado, span 2) -->
+        <article class="gallery-item reveal reveal-d1" role="listitem" tabindex="0"
+                 data-src="imagenes/Exterior local.webp"
+                 data-alt="Fachada Exterior y Acceso Principal">
+          <div class="gallery-thumb">
+            <img src="imagenes/Exterior local.webp"
+                 alt="Fachada Exterior y Acceso Principal del Supermercado SER"
+                 loading="lazy" width="900" height="506" />
+            <div class="gallery-overlay" aria-hidden="true">
+              <div class="gallery-zoom-btn">
+                <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="gallery-caption">Fachada Exterior y Acceso Principal</div>
+        </article>
+
+        <!-- 02 — Islas y Paquetería -->
+        <article class="gallery-item reveal reveal-d2" role="listitem" tabindex="0"
+                 data-src="imagenes/Exhibidores islas y Paqueteria.webp"
+                 data-alt="Islas Exhibidoras Centrales y Control">
+          <div class="gallery-thumb">
+            <img src="imagenes/Exhibidores islas y Paqueteria.webp"
+                 alt="Islas Exhibidoras Centrales y área de Control de paquetería"
+                 loading="lazy" width="600" height="450" />
+            <div class="gallery-overlay" aria-hidden="true">
+              <div class="gallery-zoom-btn"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></div>
+            </div>
+          </div>
+          <div class="gallery-caption">Islas Exhibidoras Centrales y Control</div>
+        </article>
+
+        <!-- 03 — Autoservicio -->
+        <article class="gallery-item reveal reveal-d1" role="listitem" tabindex="0"
+                 data-src="imagenes/Autoservicio.webp"
+                 data-alt="Línea de Neveras Murales de Autoservicio">
+          <div class="gallery-thumb">
+            <img src="imagenes/Autoservicio.webp"
+                 alt="Línea de Neveras Murales de Autoservicio del Supermercado SER"
+                 loading="lazy" width="600" height="450" />
+            <div class="gallery-overlay" aria-hidden="true">
+              <div class="gallery-zoom-btn"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></div>
+            </div>
+          </div>
+          <div class="gallery-caption">Línea de Neveras Murales de Autoservicio</div>
+        </article>
+
+        <!-- 04 — Nevera exhibidora -->
+        <article class="gallery-item reveal reveal-d2" role="listitem" tabindex="0"
+                 data-src="imagenes/Nevera exhibidora y anaqueles.webp"
+                 data-alt="Neveras Exhibidoras de Bebidas y Lácteos">
+          <div class="gallery-thumb">
+            <img src="imagenes/Nevera exhibidora y anaqueles.webp"
+                 alt="Neveras Exhibidoras de Bebidas y Lácteos con anaqueles"
+                 loading="lazy" width="600" height="450" />
+            <div class="gallery-overlay" aria-hidden="true">
+              <div class="gallery-zoom-btn"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></div>
+            </div>
+          </div>
+          <div class="gallery-caption">Neveras Exhibidoras de Bebidas y Lácteos</div>
+        </article>
+
+        <!-- 05 — Pasillos 1 -->
+        <article class="gallery-item reveal reveal-d3" role="listitem" tabindex="0"
+                 data-src="imagenes/Pasillos anaqueles.webp"
+                 data-alt="Distribución de Pasillos Primarios">
+          <div class="gallery-thumb">
+            <img src="imagenes/Pasillos anaqueles.webp"
+                 alt="Distribución de Pasillos Primarios con anaqueles del Supermercado SER"
+                 loading="lazy" width="600" height="450" />
+            <div class="gallery-overlay" aria-hidden="true">
+              <div class="gallery-zoom-btn"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></div>
+            </div>
+          </div>
+          <div class="gallery-caption">Distribución de Pasillos Primarios</div>
+        </article>
+
+        <!-- 06 — Pasillos 2 -->
+        <article class="gallery-item reveal reveal-d4" role="listitem" tabindex="0"
+                 data-src="imagenes/Pasillos anaqueles 2.webp"
+                 data-alt="Flujo de Circulación y Góndolas Laterales">
+          <div class="gallery-thumb">
+            <img src="imagenes/Pasillos anaqueles 2.webp"
+                 alt="Flujo de Circulación secundaria y Góndolas Laterales del Supermercado SER"
+                 loading="lazy" width="600" height="450" />
+            <div class="gallery-overlay" aria-hidden="true">
+              <div class="gallery-zoom-btn"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></div>
+            </div>
+          </div>
+          <div class="gallery-caption">Flujo de Circulación y Góndolas Laterales</div>
+        </article>
+
+        <!-- 07 — Anaqueles -->
+        <article class="gallery-item reveal reveal-d2" role="listitem" tabindex="0"
+                 data-src="imagenes/Anaqueles 1.webp"
+                 data-alt="Optimización de Anaqueles de Carga">
+          <div class="gallery-thumb">
+            <img src="imagenes/Anaqueles 1.webp"
+                 alt="Optimización de Anaqueles de Carga del Supermercado SER"
+                 loading="lazy" width="600" height="450" />
+            <div class="gallery-overlay" aria-hidden="true">
+              <div class="gallery-zoom-btn"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></div>
+            </div>
+          </div>
+          <div class="gallery-caption">Optimización de Anaqueles de Carga</div>
+        </article>
+
+        <!-- 08 — Charcutería -->
+        <article class="gallery-item reveal reveal-d3" role="listitem" tabindex="0"
+                 data-src="imagenes/Charcuteria.webp"
+                 data-alt="Área de Charcutería y Atención al Público">
+          <div class="gallery-thumb">
+            <img src="imagenes/Charcuteria.webp"
+                 alt="Área de Charcutería y Atención al Público del Supermercado SER"
+                 loading="lazy" width="600" height="450" />
+            <div class="gallery-overlay" aria-hidden="true">
+              <div class="gallery-zoom-btn"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></div>
+            </div>
+          </div>
+          <div class="gallery-caption">Área de Charcutería y Atención al Público</div>
+        </article>
+
+        <!-- 09 — Cajas -->
+        <article class="gallery-item reveal reveal-d4" role="listitem" tabindex="0"
+                 data-src="imagenes/Cajas.webp"
+                 data-alt="Puntos de Pago y Salida (Checkouts)">
+          <div class="gallery-thumb">
+            <img src="imagenes/Cajas.webp"
+                 alt="Puntos de Pago y Salida (Checkouts) del Supermercado SER"
+                 loading="lazy" width="600" height="450" />
+            <div class="gallery-overlay" aria-hidden="true">
+              <div class="gallery-zoom-btn"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></div>
+            </div>
+          </div>
+          <div class="gallery-caption">Puntos de Pago y Salida (Checkouts)</div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       LIGHTBOX
+  ============================================================ -->
+  <div id="lightbox" role="dialog" aria-modal="true" aria-label="Imagen ampliada" tabindex="-1">
+    <button id="lb-close" aria-label="Cerrar imagen">&#10005;</button>
+    <img id="lb-img" src="" alt="" />
+    <div id="lb-caption" aria-live="polite"></div>
+  </div>
+
+  <!-- ============================================================
+       CONTACTO / OUTRO
+  ============================================================ -->
+  <section id="contacto" class="section" aria-labelledby="contacto-title">
+    <div class="container">
+
+      <div class="reveal">
+        <div class="contact-badge" aria-hidden="true">✦ &nbsp; ¿Tu Próximo Proyecto?</div>
+        <h2 class="contact-headline" id="contacto-title">
+          ¡Contáctanos para tu<br><em>próximo proyecto!</em>
+        </h2>
+        <p class="contact-sub">
+          Desarrollando soluciones comerciales de alto impacto.
+        </p>
+      </div>
+
+      <div class="contact-cards reveal reveal-d2">
+
+        <a href="mailto:josehmetal@gmail.com"
+           class="contact-card"
+           id="contact-email"
+           aria-label="Enviar correo electrónico a josehmetal@gmail.com">
+          <div class="contact-card-icon icon-mail" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          </div>
+          <div class="contact-card-info">
+            <div class="contact-card-label">Correo Electrónico</div>
+            <div class="contact-card-value">josehmetal@gmail.com</div>
+          </div>
+        </a>
+
+        <a href="https://wa.me/584242430898"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="contact-card"
+           id="contact-whatsapp"
+           aria-label="Abrir WhatsApp con el número +58 424-2430898">
+          <div class="contact-card-icon icon-wa" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </div>
+          <div class="contact-card-info">
+            <div class="contact-card-label">WhatsApp</div>
+            <div class="contact-card-value">+58 424-2430898</div>
+          </div>
+        </a>
+
+      </div>
+
+      <div class="contact-location reveal reveal-d3" aria-label="Ubicación: Caracas, Venezuela">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        Caracas, Venezuela
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <span class="footer-dot" aria-hidden="true"></span>
+          Supermercado SER — Diseñado por José González
+        </div>
+        <div class="footer-copy">
+          Ruiz Pineda &nbsp;·&nbsp; Caracas, Venezuela
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       JAVASCRIPT
+  ============================================================ -->
+  <script>
+    'use strict';
+
+    /* ── Hamburger nav ─────────────────────────── */
+    const hamburger = document.getElementById('nav-hamburger');
+    const navLinks  = document.getElementById('nav-links');
+
+    hamburger.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('open');
+      hamburger.classList.toggle('open', open);
+      hamburger.setAttribute('aria-expanded', open);
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', false);
+      });
+    });
+
+    /* ── Header shrink on scroll ──────────────── */
+    const siteHeader = document.getElementById('site-header');
+    window.addEventListener('scroll', () => {
+      siteHeader.classList.toggle('scrolled', window.scrollY > 70);
+    }, { passive: true });
+
+    /* ── Active nav link via IntersectionObserver */
+    const sections   = document.querySelectorAll('section[id]');
+    const allNavLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+
+    const sectionObs = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const id = entry.target.id;
+        allNavLinks.forEach(a => {
+          a.classList.toggle('active', a.getAttribute('href') === `#${id}`);
+        });
+      });
+    }, { threshold: 0.38 });
+
+    sections.forEach(s => sectionObs.observe(s));
+
+    /* ── Scroll-reveal ────────────────────────── */
+    const revealEls = document.querySelectorAll('.reveal');
+
+    const revealObs = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('visible');
+        revealObs.unobserve(entry.target);
+      });
+    }, { threshold: 0.10, rootMargin: '0px 0px -32px 0px' });
+
+    revealEls.forEach(el => revealObs.observe(el));
+
+    /* ── Lightbox ─────────────────────────────── */
+    const lightbox   = document.getElementById('lightbox');
+    const lbImg      = document.getElementById('lb-img');
+    const lbCaption  = document.getElementById('lb-caption');
+    const lbClose    = document.getElementById('lb-close');
+
+    const openLightbox = (src, alt) => {
+      lbImg.src        = src;
+      lbImg.alt        = alt;
+      lbCaption.textContent = alt;
+      lightbox.classList.add('open');
+      lightbox.focus();
+      document.body.style.overflow = 'hidden';
+    };
+
+    const closeLightbox = () => {
+      lightbox.classList.remove('open');
+      lbImg.src = '';
+      document.body.style.overflow = '';
+    };
+
+    document.querySelectorAll('.gallery-item').forEach(item => {
+      const activate = () => openLightbox(item.dataset.src, item.dataset.alt);
+      item.addEventListener('click', activate);
+      item.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(); }
+      });
+    });
+
+    lbClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+  </script>
+
+</body>
+</html>
