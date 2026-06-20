@@ -892,20 +892,26 @@
       align-items: center;
       justify-content: center;
       padding: 1.5rem;
-      cursor: zoom-out;
     }
 
     #lightbox.open { display: flex; }
 
     #lightbox img {
-      max-width: min(92vw, 1080px);
-      max-height: 88vh;
+      max-width: min(88vw, 1080px);
+      max-height: 82vh;
       object-fit: contain;
       border-radius: var(--radius-md);
       box-shadow: var(--shadow-lg);
-      cursor: default;
+      pointer-events: none;
+      user-select: none;
+      transition: opacity 0.22s ease;
     }
 
+    #lightbox img.lb-fade {
+      opacity: 0;
+    }
+
+    /* Botón cerrar */
     #lb-close {
       position: absolute;
       top: 1.4rem;
@@ -922,21 +928,99 @@
       justify-content: center;
       cursor: pointer;
       transition: var(--transition);
+      z-index: 10;
     }
 
     #lb-close:hover { border-color: var(--gold); color: var(--gold); background: var(--gold-alpha-10); }
 
-    #lb-caption {
+    /* Botones anterior / siguiente */
+    #lb-prev,
+    #lb-next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+      z-index: 10;
+    }
+
+    #lb-prev { left: 1.2rem; }
+    #lb-next { right: 1.2rem; }
+
+    #lb-prev svg,
+    #lb-next svg {
+      width: 26px;
+      height: 26px;
+      fill: currentColor;
+    }
+
+    #lb-prev:hover,
+    #lb-next:hover {
+      border-color: var(--gold);
+      background: var(--gold-alpha-10);
+      color: var(--gold);
+    }
+
+    #lb-prev:disabled,
+    #lb-next:disabled {
+      opacity: 0.2;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    /* Pie del lightbox */
+    #lb-footer {
       position: absolute;
       bottom: 1.4rem;
       left: 50%;
       transform: translateX(-50%);
-      font-size: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      white-space: nowrap;
+    }
+
+    #lb-caption {
+      font-size: 0.74rem;
       font-weight: 600;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--text-muted);
-      white-space: nowrap;
+    }
+
+    #lb-counter {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      background: var(--gold-alpha-10);
+      border: 1px solid var(--border-gold);
+      border-radius: 50px;
+      padding: 0.2rem 0.75rem;
+    }
+
+    /* En móvil: flechas más chicas y pegadas al borde */
+    @media (max-width: 600px) {
+      #lb-prev, #lb-next {
+        width: 40px;
+        height: 40px;
+      }
+      #lb-prev { left: 0.5rem; }
+      #lb-next { right: 0.5rem; }
+      #lightbox img {
+        max-width: 96vw;
+        max-height: 75vh;
+      }
+      #lb-footer { bottom: 0.9rem; flex-direction: column; gap: 0.4rem; }
     }
 
     /* ============================================================
@@ -1324,13 +1408,13 @@
         </div>
 
         <div class="hero-ctas">
-          <a href="#galeria" class="btn btn-gold" id="hero-btn-gallery">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
-            Ver Galería 3D
-          </a>
-          <a href="#video-section" class="btn btn-ghost" id="hero-btn-video">
+          <a href="#video-section" class="btn btn-gold" id="hero-btn-video">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
             Ver Video Render
+          </a>
+          <a href="#galeria" class="btn btn-ghost" id="hero-btn-gallery">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+            Ver Galería 3D
           </a>
         </div>
 
@@ -1659,9 +1743,25 @@
        LIGHTBOX
   ============================================================ -->
   <div id="lightbox" role="dialog" aria-modal="true" aria-label="Imagen ampliada" tabindex="-1">
+    <!-- Cerrar -->
     <button id="lb-close" aria-label="Cerrar imagen">&#10005;</button>
+
+    <!-- Navegación anterior / siguiente -->
+    <button id="lb-prev" aria-label="Imagen anterior">
+      <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+    </button>
+    <button id="lb-next" aria-label="Imagen siguiente">
+      <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+    </button>
+
+    <!-- Imagen -->
     <img id="lb-img" src="" alt="" />
-    <div id="lb-caption" aria-live="polite"></div>
+
+    <!-- Pie: caption + contador -->
+    <div id="lb-footer" aria-live="polite">
+      <span id="lb-caption"></span>
+      <span id="lb-counter"></span>
+    </div>
   </div>
 
   <!-- ============================================================
@@ -1796,16 +1896,46 @@
 
     revealEls.forEach(el => revealObs.observe(el));
 
-    /* ── Lightbox ─────────────────────────────── */
-    const lightbox   = document.getElementById('lightbox');
-    const lbImg      = document.getElementById('lb-img');
-    const lbCaption  = document.getElementById('lb-caption');
-    const lbClose    = document.getElementById('lb-close');
+    /* ── Lightbox con navegación ──────────────── */
+    const lightbox  = document.getElementById('lightbox');
+    const lbImg     = document.getElementById('lb-img');
+    const lbCaption = document.getElementById('lb-caption');
+    const lbCounter = document.getElementById('lb-counter');
+    const lbClose   = document.getElementById('lb-close');
+    const lbPrev    = document.getElementById('lb-prev');
+    const lbNext    = document.getElementById('lb-next');
 
-    const openLightbox = (src, alt) => {
-      lbImg.src        = src;
-      lbImg.alt        = alt;
-      lbCaption.textContent = alt;
+    // Construir array ordenado de imágenes de la galería
+    const galleryItems = Array.from(document.querySelectorAll('.gallery-item'));
+    let currentIndex   = 0;
+
+    const updateNav = () => {
+      lbPrev.disabled = currentIndex === 0;
+      lbNext.disabled = currentIndex === galleryItems.length - 1;
+      lbCounter.textContent = `${currentIndex + 1} / ${galleryItems.length}`;
+    };
+
+    const showImage = (index, animate = false) => {
+      const item = galleryItems[index];
+      if (animate) {
+        lbImg.classList.add('lb-fade');
+        setTimeout(() => {
+          lbImg.src = item.dataset.src;
+          lbImg.alt = item.dataset.alt;
+          lbCaption.textContent = item.dataset.alt;
+          lbImg.classList.remove('lb-fade');
+        }, 180);
+      } else {
+        lbImg.src = item.dataset.src;
+        lbImg.alt = item.dataset.alt;
+        lbCaption.textContent = item.dataset.alt;
+      }
+      currentIndex = index;
+      updateNav();
+    };
+
+    const openLightbox = (index) => {
+      showImage(index, false);
       lightbox.classList.add('open');
       lightbox.focus();
       document.body.style.overflow = 'hidden';
@@ -1817,17 +1947,49 @@
       document.body.style.overflow = '';
     };
 
-    document.querySelectorAll('.gallery-item').forEach(item => {
-      const activate = () => openLightbox(item.dataset.src, item.dataset.alt);
+    const goNext = () => {
+      if (currentIndex < galleryItems.length - 1) showImage(currentIndex + 1, true);
+    };
+
+    const goPrev = () => {
+      if (currentIndex > 0) showImage(currentIndex - 1, true);
+    };
+
+    // Abrir desde cada tarjeta de la galería
+    galleryItems.forEach((item, idx) => {
+      const activate = () => openLightbox(idx);
       item.addEventListener('click', activate);
       item.addEventListener('keydown', e => {
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(); }
       });
     });
 
+    // Botones de navegación
+    lbNext.addEventListener('click', e => { e.stopPropagation(); goNext(); });
+    lbPrev.addEventListener('click', e => { e.stopPropagation(); goPrev(); });
+
+    // Cerrar
     lbClose.addEventListener('click', closeLightbox);
     lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+    // Teclado: Escape = cerrar, flechas = navegar
+    document.addEventListener('keydown', e => {
+      if (!lightbox.classList.contains('open')) return;
+      if (e.key === 'Escape')      closeLightbox();
+      if (e.key === 'ArrowRight')  goNext();
+      if (e.key === 'ArrowLeft')   goPrev();
+    });
+
+    // Touch swipe en móvil
+    let touchStartX = 0;
+    lightbox.addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].clientX;
+    }, { passive: true });
+    lightbox.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) < 40) return; // umbral mínimo
+      if (dx < 0) goNext(); else goPrev();
+    }, { passive: true });
   </script>
 
 </body>
